@@ -1,8 +1,6 @@
 import { Car, CarImage } from "@/common.types";
-import Image from "next/image";
-import Link from "next/link";
-import ImagesSlider from "./ImagesSlider";
 import CarData from "./CarData";
+import ImagesSlider from "./ImagesSlider";
 
 type Props = {
     car: Car;

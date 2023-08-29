@@ -17,7 +17,7 @@ const RouteProtector = () => {
             }
         };
         checkSession();
-    }, []);
+    }, [router]);
 
     return <></>;
 };

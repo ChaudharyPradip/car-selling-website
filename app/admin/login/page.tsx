@@ -71,7 +71,6 @@ const Login = () => {
                         }
                         title="Log in"
                         textColor="text-white"
-                        bgColor="bg-accent"
                         type="submit"
                         fullWidth={true}
                         rightIcon="/login-logout.svg"

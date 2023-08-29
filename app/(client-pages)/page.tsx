@@ -4,6 +4,8 @@ import { getAllCars } from "@/lib/actions";
 import Image from "next/image";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
     const { cars }: { cars: Car[] } = await getAllCars();
 
@@ -26,7 +28,7 @@ export default async function Home() {
     return (
         <div>
             <Link
-                className="ml-auto px-3 py-2 bg-accent rounded-md text-white hover:text-white focus:text-white flex gap-2 items-center max-w-fit"
+                className="ml-auto px-3 py-2 bg-primary hover:bg-accent rounded-md text-white hover:text-white focus:text-white flex gap-2 items-center max-w-fit"
                 href={`tel:${process.env.NEXT_PUBLIC_CONTACT_NUMBER}`}
             >
                 <Image

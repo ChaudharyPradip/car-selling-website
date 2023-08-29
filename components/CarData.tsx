@@ -28,7 +28,7 @@ const CarData = ({ car }: { car: Car }) => {
                     {formatINR(car.price as string) || "₹ Negotiate on call"}
                 </p>
                 <a
-                    className="px-3 py-2 bg-accent rounded-md text-white hover:text-white focus:text-white flex gap-2 items-center max-w-fit"
+                    className="px-3 py-2 bg-primary hover:bg-accent rounded-md text-white hover:text-white focus:text-white flex gap-2 items-center max-w-fit"
                     href={`tel:${process.env.NEXT_PUBLIC_CONTACT_NUMBER}`}
                 >
                     <Image

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect, KeyboardEvent } from "react";
 import FormField from "./FormField";
 import Button from "./Button";
 import { CarImage } from "@/common.types";
@@ -12,6 +12,32 @@ type Props = {
 
 const Modal = ({ setShowModal, handleFormChange }: Props) => {
     const [property, setProperty] = useState("");
+
+    const inputRef = useRef<HTMLInputElement | null>(null);
+    const buttonRef = useRef<HTMLButtonElement | null>(null);
+
+    useEffect(() => {
+        const handleKeyDown = (event: globalThis.KeyboardEvent) => {
+            if (event.key === "Tab") {
+                event.preventDefault();
+
+                const activeElement = document.activeElement;
+                if (activeElement === inputRef.current && buttonRef.current) {
+                    buttonRef.current.focus();
+                } else if (
+                    activeElement === buttonRef.current &&
+                    inputRef.current
+                ) {
+                    inputRef.current.focus();
+                }
+            }
+        };
+        document.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, []);
 
     const addProperty = () => {
         handleFormChange(property.toLowerCase(), "");
@@ -31,6 +57,7 @@ const Modal = ({ setShowModal, handleFormChange }: Props) => {
             >
                 <h2 className="text-center mb-6">Add new Property</h2>
                 <FormField
+                    ref={inputRef}
                     title="Property name"
                     type="text"
                     placeholder="property name"
@@ -41,9 +68,9 @@ const Modal = ({ setShowModal, handleFormChange }: Props) => {
                     showLabel={true}
                 />
                 <Button
+                    ref={buttonRef}
                     type="submit"
                     handleClick={addProperty}
-                    bgColor="bg-accent"
                     title="Add property"
                     disabled={property === ""}
                     rightIcon="/plus.svg"

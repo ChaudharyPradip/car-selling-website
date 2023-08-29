@@ -31,7 +31,7 @@ const CarCard = ({ isAdmin, id, image, name, price, year }: Props) => {
     return (
         <div className="max-w-xs rounded-lg shadow-xl border-2 border-gray-100 overflow-hidden hover:scale-[1.01]">
             <Link
-                className="text-inherit hover:text-inherit"
+                className="text-inherit hover:text-inherit active:text-inherit visited:text-inherit"
                 href={`${isAdmin ? "/admin/cars/" + id : "/cars/" + id}`}
             >
                 <div className="">

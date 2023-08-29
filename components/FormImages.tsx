@@ -206,6 +206,7 @@ const FormImages = ({ images, handleFormChange }: Props) => {
             </div>
             <div className="flex gap-3">
                 <Image
+                    tabIndex={0}
                     onClick={editImage}
                     className="cursor-pointer hover:scale-125"
                     src="/edit.svg"
@@ -214,6 +215,7 @@ const FormImages = ({ images, handleFormChange }: Props) => {
                     alt="edit button"
                 />
                 <Image
+                    tabIndex={0}
                     onClick={deleteImage}
                     className="cursor-pointer hover:scale-125"
                     src="/delete.svg"
@@ -227,11 +229,11 @@ const FormImages = ({ images, handleFormChange }: Props) => {
                     <div
                         onClick={() => setCurrentImageId(image.id)}
                         key={image.id}
-                        className={`w-2 aspect-square rounded-full cursor-pointer ${
+                        className={`w-2 aspect-square rounded-full cursor-pointer hover:scale-125 ${
                             currentImageId === image.id
-                                ? "bg-accent scale-150"
-                                : "bg-slate-700"
-                        } hover:scale-125`}
+                                ? "bg-primary scale-150 hover:scale-150"
+                                : "bg-slate-400"
+                        }`}
                     ></div>
                 ))}
             </div>
@@ -239,7 +241,6 @@ const FormImages = ({ images, handleFormChange }: Props) => {
                 <Button
                     handleClick={addNewImage}
                     title="Add another image"
-                    bgColor="bg-primary"
                     rightIcon="/plus.svg"
                 />
             </div>

@@ -139,7 +139,6 @@ const CarForm = ({ type, car, id }: Props) => {
                         ? `${type === "create" ? "Adding Car" : "Editing Car"}`
                         : `${type === "create" ? "Add Car" : "Edit Car"}`
                 }
-                bgColor="bg-accent"
                 leftIcon={isSubmitting ? "" : "/add.svg"}
                 type="submit"
             />

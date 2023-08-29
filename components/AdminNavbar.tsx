@@ -12,7 +12,7 @@ const AdminNavbar = () => {
 
     const handleLogout = async () => {
         try {
-            const response = await toast.promise(logout(), {
+            await toast.promise(logout(), {
                 pending: "Logging out",
                 success: "Logged out successfully",
                 error: "Error logging out"
@@ -27,7 +27,6 @@ const AdminNavbar = () => {
             <Button
                 handleClick={handleLogout}
                 title="Log out"
-                bgColor="bg-accent"
                 rightIcon="/login-logout.svg"
             />
         </div>

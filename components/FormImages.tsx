@@ -13,30 +13,60 @@ const FormImages = ({ images, handleFormChange }: Props) => {
     const [currentImageId, setCurrentImageId] = useState(images[0].id);
     const [slideStartX, setSlideStartX] = useState(0);
 
-    const handleImageChange = (
+    const handleImageChange = async (
         e: ChangeEvent<HTMLInputElement>,
         id: string
     ) => {
         e.preventDefault();
 
-        const file = e.target.files?.[0];
+        const files = e.target.files;
 
-        if (!file) return;
+        if (!files || files.length === 0) return;
 
-        if (!file.type.includes("image")) {
-            return toast.error("Please upload an image file");
+        const newImages = Array.from(files).filter((file) =>
+            file.type.includes("image")
+        );
+
+        if (newImages.length === 0) {
+            return toast.error("Please upload image files");
         }
 
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
+        const readerPromises = newImages.map((file) => {
+            return new Promise<string>((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
 
-        reader.onload = () => {
+                reader.onload = () => {
+                    resolve(reader.result as string);
+                };
+
+                reader.onerror = () => {
+                    reject(new Error("Couldn't read image data"));
+                };
+            });
+        });
+
+        try {
+            const results = await Promise.all(readerPromises);
+
             const result = [...images];
-            result.find((image) => image.id === id)!.url =
-                reader.result as string;
+            let targetIndex = result.findIndex((image) => image.id === id);
+
+            results.forEach((url, index) => {
+                if (index == 0) {
+                    result[targetIndex].url = url;
+                    targetIndex++;
+                } else {
+                    id = crypto.randomUUID();
+                    result.splice(targetIndex++, 0, { id, url });
+                }
+            });
 
             handleFormChange("images", result);
-        };
+            setCurrentImageId(id);
+        } catch (error: any) {
+            toast.error("Error processing images:", error);
+        }
     };
 
     const handleNextClick = () => {
@@ -154,6 +184,7 @@ const FormImages = ({ images, handleFormChange }: Props) => {
                                         onChange={(e) => {
                                             handleImageChange(e, image.id);
                                         }}
+                                        multiple
                                     />
                                     <div className="flex flex-col items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10">
                                         <Image

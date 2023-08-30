@@ -2,7 +2,6 @@ import { Car, CarImage } from "@/common.types";
 import Button from "@/components/Button";
 import CarCard from "@/components/CarCard";
 import { getAllCars } from "@/lib/actions";
-import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
@@ -17,9 +16,9 @@ const Admin = async () => {
                 </h1>
                 <div className="flex flex-col gap-2 items-center justify-center mt-32 sm:mt-0 sm:min-h-[60vh]">
                     <h2>You don&apos;t have any Car</h2>
-                    <Link href="/admin/add-car">
+                    <a href="/admin/add-car">
                         <Button title="Add now" rightIcon="/add.svg" />
-                    </Link>
+                    </a>
                 </div>
             </>
         );
@@ -28,9 +27,9 @@ const Admin = async () => {
     return (
         <section className="flex flex-col gap-5 items-center mt-10 mb-5">
             <h1 className="text-center text-5xl font-extrabold">Cars</h1>
-            <Link className="sm:ml-auto inline-block" href="/admin/add-car">
+            <a className="sm:ml-auto inline-block" href="/admin/add-car">
                 <Button title="Add new car" rightIcon="/add.svg" />
-            </Link>
+            </a>
             <div className="cars_grid w-full">
                 {cars.map((car) => (
                     <CarCard

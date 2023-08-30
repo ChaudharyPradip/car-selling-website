@@ -2,7 +2,6 @@
 
 import { deleteCar } from "@/lib/actions";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
@@ -22,7 +21,7 @@ const CarActions = ({ id }: { id: string }) => {
     };
     return (
         <div className="flex gap-3">
-            <Link href={`/admin/edit-car/${id}`}>
+            <a href={`/admin/edit-car/${id}`}>
                 <Image
                     className="cursor-pointer hover:scale-125"
                     src="/edit.svg"
@@ -30,7 +29,7 @@ const CarActions = ({ id }: { id: string }) => {
                     height={25}
                     alt="edit button"
                 />
-            </Link>
+            </a>
             <Image
                 tabIndex={0}
                 onClick={handleDelete}

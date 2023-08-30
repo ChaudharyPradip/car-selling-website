@@ -1,8 +1,6 @@
 import Button from "@/components/Button";
-import CarActions from "@/components/CarActions";
 import CarDetails from "@/components/CarDetails";
 import { getCar } from "@/lib/actions";
-import Link from "next/link";
 
 type Params = {
     id: string[];
@@ -21,10 +19,10 @@ const Car = async ({ params }: { params: Params }) => {
                     <h1 className="font-medium text-3xl">
                         We guess you are lost
                     </h1>
-                    <Link href="/">
+                    <a href="/">
                         {" "}
                         <Button title="Go back" fullWidth={false} />{" "}
-                    </Link>
+                    </a>
                 </div>
             </div>
         );

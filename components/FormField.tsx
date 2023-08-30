@@ -35,6 +35,14 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
         ref
     ) {
         const [validationMessage, setValidationMessage] = useState("");
+
+        const htmlProps = Object.entries(props)
+            .filter(([key]) => key !== "removeField")
+            .reduce(
+                (filtered, [key, value]) => ({ ...filtered, [key]: value }),
+                {}
+            );
+
         const handleChange = (value: string) => {
             if (type && type === "number") {
                 if (isNaN(+value) || parseInt(value) <= 0) {
@@ -48,7 +56,7 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
             }
         };
         return (
-            <div {...props}>
+            <div {...htmlProps}>
                 {showLabel && (
                     <label htmlFor="" className="font-normal capitalize">
                         {title}

@@ -67,7 +67,6 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
                     ) : (
                         <input
                             ref={ref as RefObject<HTMLInputElement>}
-                            autoFocus
                             type={type === "number" ? "text" : type || "text"}
                             placeholder={placeholder}
                             value={state}

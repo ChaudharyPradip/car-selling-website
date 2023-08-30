@@ -32,11 +32,15 @@ const Button = forwardRef<HTMLButtonElement, Props>(function Button(
             ref={ref}
             type={type || "button"}
             disabled={disabled}
-            className={`flex justify-center items-center px-3 py-1 gap-2 sm:gap-3 sm:px-3 sm:py-2.5 rounded-md text-lg font-medium outline-none hover:bg-accent focus:bg-accent ${
+            className={`flex justify-center items-center px-3 py-1 gap-2 sm:gap-3 sm:px-3 sm:py-2.5 rounded-md text-lg font-medium outline-none ${
                 textColor || "text-white"
-            } ${disabled ? "bg-[#c7b0f2]" : bgColor ? bgColor : "bg-primary"} ${
-                fullWidth ? "w-full" : ""
-            }`}
+            } ${
+                disabled
+                    ? "bg-[#c7b0f2]"
+                    : bgColor
+                    ? bgColor
+                    : "bg-primary hover:bg-accent focus:bg-accent"
+            } ${fullWidth ? "w-full" : ""}`}
             onClick={handleClick}
         >
             {leftIcon && (

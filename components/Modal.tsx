@@ -17,6 +17,9 @@ const Modal = ({ setShowModal, handleFormChange }: Props) => {
     const buttonRef = useRef<HTMLButtonElement | null>(null);
 
     useEffect(() => {
+        if (inputRef.current) {
+            inputRef.current.focus();
+        }
         const handleKeyDown = (event: globalThis.KeyboardEvent) => {
             if (event.key === "Tab") {
                 event.preventDefault();

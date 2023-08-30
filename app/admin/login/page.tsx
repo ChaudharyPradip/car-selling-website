@@ -33,7 +33,7 @@ const Login = () => {
     };
 
     return (
-        <section className="grid place-items-center min-h-screen">
+        <section className="grid place-items-center h_full_dvh">
             <form
                 className="flex flex-col gap-10 text-center"
                 onSubmit={handleLogin}

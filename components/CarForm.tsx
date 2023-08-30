@@ -15,7 +15,7 @@ type Props = {
     car?: Car;
 };
 
-const initialForm: Car = {
+let formSchema: Car = {
     images: [{ id: crypto.randomUUID(), url: "" }],
     name: "",
     price: "",
@@ -35,7 +35,9 @@ const initialForm: Car = {
 };
 
 const CarForm = ({ type, car, id }: Props) => {
+    let initialForm;
     if (type === "edit" && car) {
+        initialForm = { ...formSchema };
         for (const key in car) {
             if (key !== "_id" && key !== "__v") {
                 initialForm[key] = car[key];
@@ -46,7 +48,10 @@ const CarForm = ({ type, car, id }: Props) => {
                 delete initialForm[key];
             }
         }
+    } else {
+        initialForm = formSchema;
     }
+
     const [form, setForm] = useState<Car>(initialForm);
     const [isSubmitting, setIsSubmitting] = useState(false);
 

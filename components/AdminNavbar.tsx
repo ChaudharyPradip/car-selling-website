@@ -1,11 +1,11 @@
 "use client";
 
-import React from "react";
-import Image from "next/image";
-import Button from "./Button";
-import { toast } from "react-toastify";
 import { logout } from "@/lib/actions";
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import Button from "./Button";
 
 const AdminNavbar = () => {
     const router = useRouter();
@@ -23,7 +23,9 @@ const AdminNavbar = () => {
 
     return (
         <div className="flex flex-col gap-5 justify-between items-center py-5 sm:flex-row">
-            <Image src="/logo.png" width={300} height={120} alt="logo" />
+            <Link href="/">
+                <Image src="/logo.png" width={300} height={120} alt="logo" />
+            </Link>
             <Button
                 handleClick={handleLogout}
                 title="Log out"

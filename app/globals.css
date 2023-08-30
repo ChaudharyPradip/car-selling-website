@@ -54,6 +54,8 @@ body {
     line-height: 1.6;
     color: var(--clr-text);
     background-color: var(--clr-background);
+    min-height: 100vh;
+    min-height: 100dvh;
 }
 
 h1,
@@ -80,8 +82,10 @@ a {
 }
 
 a:hover,
-a:focus {
-    color: var(--clr-accent);
+a:focus,
+a:active,
+a:visited {
+    color: inherit;
 }
 
 .wrapper {
@@ -113,4 +117,9 @@ a:focus {
 
 .font_accent {
     font-family: var(--ff-accent);
+}
+
+.h_full_dvh {
+    min-height: 100vh;
+    min-height: 100dvh;
 }

@@ -35,10 +35,10 @@ const Admin = async () => {
                 {cars.map((car) => (
                     <CarCard
                         isAdmin={true}
-                        key={car._id as string}
-                        id={car._id as string}
+                        key={car?._id as string}
+                        id={car?._id as string}
                         image={
-                            (car.images as CarImage[])?.[0]?.url ||
+                            (car?.images as CarImage[])?.[0]?.url ||
                             "/placeholder.jpg"
                         }
                         name={(car?.name as string) || "No name"}

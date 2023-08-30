@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { Car, CarImage } from "@/common.types";
+import { useState } from "react";
 import Button from "./Button";
 import FormField from "./FormField";
 import Modal from "./Modal";
-import { Car, CarImage } from "@/common.types";
 
 type Props = {
     form: Car;
@@ -103,7 +103,6 @@ const FormFields = ({ form, setForm, handleFormChange }: Props) => {
                             setShowModal(true);
                         }}
                         title="Add Field"
-                        bgColor="bg-primary"
                         rightIcon="/plus.svg"
                     />
                 </div>

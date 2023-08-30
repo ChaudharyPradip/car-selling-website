@@ -22,7 +22,7 @@ const AdminNavbar = () => {
 
     return (
         <div className="flex flex-col gap-5 justify-between items-center py-5 sm:flex-row">
-            <a href="/">
+            <a href="/admin">
                 <Image src="/logo.png" width={300} height={120} alt="logo" />
             </a>
             <Button

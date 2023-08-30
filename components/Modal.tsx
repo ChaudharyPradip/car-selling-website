@@ -34,7 +34,13 @@ const Modal = ({ setShowModal, handleFormChange }: Props) => {
                     inputRef.current.focus();
                 }
             }
+
+            if (event.key === "Enter") {
+                event.preventDefault();
+                !buttonRef?.current?.disabled && buttonRef.current?.click();
+            }
         };
+
         document.addEventListener("keydown", handleKeyDown);
 
         return () => {
@@ -52,7 +58,7 @@ const Modal = ({ setShowModal, handleFormChange }: Props) => {
             className="fixed h-full w-full top-0 left-0 bg-black bg-opacity-20 grid place-items-center p-4 z-10"
             onClick={() => setShowModal(false)}
         >
-            <form
+            <div
                 className="bg-white p-4 w-full max-w-md max-h-[500px] rounded-lg flex flex-col gap-5"
                 onClick={(e) => {
                     e.stopPropagation();
@@ -72,13 +78,12 @@ const Modal = ({ setShowModal, handleFormChange }: Props) => {
                 />
                 <Button
                     ref={buttonRef}
-                    type="submit"
                     handleClick={addProperty}
                     title="Add property"
                     disabled={property === ""}
                     rightIcon="/plus.svg"
                 />
-            </form>
+            </div>
         </div>
     );
 };

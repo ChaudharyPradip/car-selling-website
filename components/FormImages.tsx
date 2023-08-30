@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import Button from "./Button";
 import { CarImage } from "@/common.types";
+import { toast } from "react-toastify";
 
 type Props = {
     images: CarImage[];
@@ -23,7 +24,7 @@ const FormImages = ({ images, handleFormChange }: Props) => {
         if (!file) return;
 
         if (!file.type.includes("image")) {
-            return alert("Please upload an image file");
+            return toast.error("Please upload an image file");
         }
 
         const reader = new FileReader();

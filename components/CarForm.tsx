@@ -129,7 +129,12 @@ const CarForm = ({ type, car, id }: Props) => {
     };
 
     return (
-        <form onSubmit={handleFormSubmit} className="flex flex-col gap-5 my-4">
+        <form
+            onSubmit={handleFormSubmit}
+            className={`flex flex-col gap-5 my-4 ${
+                isSubmitting ? "pointer-events-none opacity-70" : ""
+            }`}
+        >
             <FormImages
                 images={form.images as CarImage[]}
                 handleFormChange={handleFormChange}

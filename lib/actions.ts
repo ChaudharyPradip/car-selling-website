@@ -87,9 +87,9 @@ export const getCar = async (id: string) => {
 };
 
 export const addNewCar = async (car: Car) => {
-    const images = await (car.images as CarImage[]).filter(
-        (image) => image.url !== ""
-    );
+    const images = (car?.images as CarImage[])
+        .filter((image) => image.url !== "")
+        .map((image) => ({ ...image }));
 
     try {
         for (const image of images) {
@@ -116,9 +116,9 @@ export const editCar = async (id: string, car: Car) => {
         return base64Regex.test(value);
     }
 
-    const images = await (car.images as CarImage[]).filter(
-        (image) => image.url !== ""
-    );
+    const images = (car?.images as CarImage[])
+        .filter((image) => image.url !== "")
+        .map((image) => ({ ...image }));
 
     try {
         for (const image of images) {

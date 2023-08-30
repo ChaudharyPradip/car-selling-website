@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, forwardRef, RefObject } from "react";
+import React, { useState, forwardRef, RefObject } from "react";
 
 type Props = {
     type?: string;
@@ -16,7 +16,8 @@ type Props = {
           removeField: (field: string) => void;
       }
     | { isRemovable?: false }
-);
+) &
+    React.HTMLProps<HTMLDivElement>;
 
 const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
     function FormField(
@@ -47,7 +48,7 @@ const FormField = forwardRef<HTMLInputElement | HTMLTextAreaElement, Props>(
             }
         };
         return (
-            <div className="">
+            <div {...props}>
                 {showLabel && (
                     <label htmlFor="" className="font-normal capitalize">
                         {title}

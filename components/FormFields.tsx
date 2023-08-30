@@ -14,10 +14,15 @@ type Props = {
 
 const FormFields = ({ form, setForm, handleFormChange }: Props) => {
     const [showModal, setShowModal] = useState(false);
+    const [removingField, setRemovingField] = useState<string | null>(null);
 
     const removeField = (field: string) => {
-        const { [field]: exclude, ...remaining } = form;
-        setForm(remaining);
+        setRemovingField(field);
+        setTimeout(() => {
+            const { [field]: exclude, ...remaining } = form;
+            setForm(remaining);
+            setRemovingField(null);
+        }, 300);
     };
 
     return (
@@ -35,6 +40,11 @@ const FormFields = ({ form, setForm, handleFormChange }: Props) => {
                         .map((key) =>
                             key === "name" ? (
                                 <FormField
+                                    className={`${
+                                        removingField === key
+                                            ? "-translate-x-full sm:translate-x-0 sm:scale-0 sm:opacity-0"
+                                            : "translate-x-0"
+                                    } transition-all duration-300 transform`}
                                     key={key}
                                     title="name"
                                     placeholder="name of Car"
@@ -48,6 +58,11 @@ const FormFields = ({ form, setForm, handleFormChange }: Props) => {
                                 />
                             ) : key === "price" ? (
                                 <FormField
+                                    className={`${
+                                        removingField === key
+                                            ? "-translate-x-full sm:translate-x-0 sm:scale-0 sm:opacity-0"
+                                            : "translate-x-0"
+                                    } transition-all duration-300 transform`}
                                     key={key}
                                     title="price"
                                     type="number"
@@ -62,6 +77,11 @@ const FormFields = ({ form, setForm, handleFormChange }: Props) => {
                                 />
                             ) : (
                                 <FormField
+                                    className={`${
+                                        removingField === key
+                                            ? "-translate-x-full sm:translate-x-0 sm:scale-0 sm:opacity-0"
+                                            : "translate-x-0"
+                                    } transition-all duration-300 transform`}
                                     key={key}
                                     title={key}
                                     type="text"

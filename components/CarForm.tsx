@@ -109,6 +109,8 @@ const CarForm = ({ type, car, id }: Props) => {
                     success: "Car added successfully",
                     error: "Error adding a Car"
                 });
+                // Clearing the images of form after adding car as it persists across renders because of being a nested object
+                formSchema.images = [{ id: crypto.randomUUID(), url: "" }];
                 router.push("/admin");
                 router.refresh();
             } else {

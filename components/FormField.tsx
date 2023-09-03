@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, forwardRef, RefObject } from "react";
+import React, { RefObject, forwardRef, useState } from "react";
 
 type Props = {
     type?: string;

@@ -67,15 +67,11 @@ export const uploadImage = async (imagePath: string) => {
         const { data } = await api.post(uploadURL, formData, {
             headers: {
                 "Content-Type": "multipart/form-data"
-            },
-            onUploadProgress: (e) => {
-                console.log(e.loaded / (e.total || 1));
             }
         });
 
         return data.secure_url;
     } catch (error) {
-        console.log(error);
         throw error;
     }
 };

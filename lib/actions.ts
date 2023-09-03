@@ -49,39 +49,33 @@ export const isLoggedIn = async () => {
 };
 
 export const uploadImage = async (imagePath: string) => {
+    const formData = new FormData();
+    formData.append("file", imagePath);
+    formData.append("api_key", process.env.NEXT_PUBLIC_CLOUDINARY_KEY || "");
+    formData.append("folder", "cac");
+    formData.append("upload_preset", "cac");
+
+    const uploadURL = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_NAME}/image/upload`;
+
     try {
-        const { data } = await api.post(
-            "/api/upload",
-            { path: imagePath },
-            {
-                withCredentials: true
+        const {
+            data: { signature, timestamp }
+        } = await api.get("/api/get-signature");
+        formData.append("signature", signature);
+        formData.append("timestamp", timestamp);
+
+        const { data } = await api.post(uploadURL, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            },
+            onUploadProgress: (e) => {
+                console.log(e.loaded / (e.total || 1));
             }
-        );
+        });
 
         return data.secure_url;
     } catch (error) {
-        throw error;
-    }
-};
-
-export const getAllCars = async () => {
-    try {
-        const { data } = await api.get("/api/cars", {
-            withCredentials: true
-        });
-        return data;
-    } catch (error) {
-        throw error;
-    }
-};
-
-export const getCar = async (id: string) => {
-    try {
-        const { data } = await api.get(`/api/cars/${id}`, {
-            withCredentials: true
-        });
-        return data;
-    } catch (error: any) {
+        console.log(error);
         throw error;
     }
 };
@@ -92,8 +86,8 @@ export const addNewCar = async (car: Car) => {
         .map((image) => ({ ...image }));
 
     try {
-        for (const image of images) {
-            image.url = await uploadImage(image.url);
+        for (let i = 0; i < images.length; i++) {
+            images[i].url = await uploadImage(images[i].url);
         }
 
         const { data } = await api.post(
@@ -149,6 +143,28 @@ export const deleteCar = async (id: string) => {
 
         return data;
     } catch (error) {
+        throw error;
+    }
+};
+
+export const getAllCars = async () => {
+    try {
+        const { data } = await api.get("/api/cars", {
+            withCredentials: true
+        });
+        return data;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const getCar = async (id: string) => {
+    try {
+        const { data } = await api.get(`/api/cars/${id}`, {
+            withCredentials: true
+        });
+        return data;
+    } catch (error: any) {
         throw error;
     }
 };

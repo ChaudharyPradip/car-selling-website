@@ -22,7 +22,7 @@ export default async function Home() {
 
   return (
     <div>
-      <a
+      {/* <a
         className="ml-auto px-3 py-2 bg-primary hover:bg-accent rounded-md text-white hover:text-white focus:text-white flex gap-2 items-center max-w-fit"
         href={`tel:${process.env.NEXT_PUBLIC_CONTACT_NUMBER}`}
       >
@@ -34,7 +34,7 @@ export default async function Home() {
           alt="phone icon"
         />
         Call the owner
-      </a>
+      </a> */}
       <section className="flex flex-col gap-5 items-center mt-10 mb-5">
         <h1 className="text-center text-5xl font-extrabold">Cars</h1>
         <div className="cars_grid w-full">

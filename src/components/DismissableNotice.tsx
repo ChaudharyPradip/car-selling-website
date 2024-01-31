@@ -13,8 +13,8 @@ const DismissableNotice = ({
 
   useEffect(() => {
     // Check if the user has dismissed the notice before
-    if (localStorage.getItem("noticeDismissed") !== null) {
-      setShowNotice(false);
+    if (localStorage.getItem("noticeDismissed") === null) {
+      setShowNotice(true);
     }
   }, []);
 
